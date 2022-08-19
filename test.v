@@ -1,12 +1,14 @@
-module test(A, B, C, Y);
-    input A, B, C;
-    output Y;
+module Register(clock, r_enable, data_in, data_out);
 
-    wire gate1, gate2, gate2a, gate3;
+input             clock;
+input             r_enable;
+input      [15:0] data_in;
+output reg [15:0] data_out;
 
-    nor n1(gate1, A, B);
-    and a1(gate2, A, B);
-    not il(gate2a, gate2);
-    or ol(gate3, gate1, gate2a);
-    and a2(Y, gate3, C);
+always @(posedge clock)
+begin
+    if(r_enable)
+        data_out <= data_in;
+end
+
 endmodule

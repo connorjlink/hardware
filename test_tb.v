@@ -1,40 +1,24 @@
- `timescale 1ns / 100ps
- `include "test.v"
+`include "test.v"
+module RegisterTestbench;
 
- module test_tb;
-    reg A, B, C;
-    wire Y;
+reg         clock = 0;
+reg         enable = 1;
+reg  [15:0] value_in;
+wire [15:0] value_out;
 
-    test test_inst(
-        .A(A),
-        .B(B),
-        .C(C),
-        .Y(Y)
-    );
+always #1 clock = !clock;
 
-    initial
-        begin
-            assign A = 0;
-            assign B = 0;
-            assign C = 0;
+initial $dumpfile("registertestbench.vcd");
+initial $dumpvars(0, RegisterTestbench);
 
-            #20 assign A = 1;
-            #20 assign A = 0;
-            #20 assign B = 1;
-                assign C = 1;
-            #20 assign B = 0;
-            #20 assign A = 1;
-                assign B = 1;
-            #20 assign A = 0;
-                assign C = 0;
-            #20 assign B = 0;
-            #20 assign A = 1;
-                assign C = 1;
+Register r(clock, enable, value_in, value_out);
 
-            $dumpfile("test.vcd");
-            $dumpvars;
-
-            $finish;
-
-        end
+initial begin
+    //These events must be in chronological order.
+    # 5 value_in = 31;
+    # 5 value_in = 127;
+    # 5 enable = 0;
+    # 5 value_in = 1023;
+    # 5 $finish;
+end
 endmodule
