@@ -8,11 +8,10 @@ module Alu(input[7:0] a, b, fi, input[6:0] op, output[7:0] d, fo);
     assign d = out[7:0];
     assign fo = flags;
 
-
     localparam CARRY = 0;
 
-
-    initial begin
+    initial
+    begin
         out = 0;
         flags = 0;
     end
@@ -23,39 +22,39 @@ module Alu(input[7:0] a, b, fi, input[6:0] op, output[7:0] d, fo);
         bi = {1'b0,b};
 
         case (op)
-            7'b0000001: 
+            7'b0000001: //addition
             begin
                 out = ai + bi + {8'h00,fi[CARRY]};
                 flags[CARRY] = out[8];
             end
 
-            7'b0000010:
+            7'b0000010: //subtraction
             begin
                 out = ai - bi - {8'h00,fi[CARRY]};
                 flags[CARRY] = out[8];
             end
 
-            7'b0000100:
+            7'b0000100: //bitwise and
             begin
                 out = ai & bi;
             end
 
-            7'b0001000:
+            7'b0001000: //bitwise or
             begin
                 out = ai | bi;
             end
 
-            7'b0010000:
+            7'b0010000: //bitwise not
             begin
                 out = ~ai;
             end
 
-            7'b0100000:
+            7'b0100000: //left shift
             begin
                 out = ai << bi;
             end
 
-            7'b1000000:
+            7'b1000000: //right shift
             begin
                 out = ai >> bi;
             end
@@ -63,8 +62,7 @@ module Alu(input[7:0] a, b, fi, input[6:0] op, output[7:0] d, fo);
             default: ;
         endcase
 
-        flags[1] = out[7:0] == 0;
-        //flags[2] = (~out[7:0] + 1) > 0;
+        flags[1] = (out[7:0] == 0);
         tmp = out[7:0];
         flags[2] = tmp > 0;
     end
