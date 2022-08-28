@@ -1,0 +1,219 @@
+$date
+	Sun Aug 28 01:00:04 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	100ps
+$end
+$scope module EauTestbench $end
+$var wire 16 ! aq [15:0] $end
+$var wire 8 " dq [7:0] $end
+$var reg 16 # a [15:0] $end
+$var reg 1 $ ai $end
+$var reg 1 % ao $end
+$var reg 1 & clock $end
+$var reg 8 ' d [7:0] $end
+$var reg 1 ( di $end
+$var reg 1 ) do $end
+$var reg 1 * hs $end
+$var reg 1 + ls $end
+$var reg 1 , rst $end
+$scope module eau $end
+$var wire 16 - a [15:0] $end
+$var wire 1 $ ai $end
+$var wire 1 % ao $end
+$var wire 16 . aq [15:0] $end
+$var wire 1 & clk $end
+$var wire 8 / d [7:0] $end
+$var wire 1 ( di $end
+$var wire 1 ) do $end
+$var wire 8 0 dq [7:0] $end
+$var wire 1 * hs $end
+$var wire 1 + ls $end
+$var wire 1 , rst $end
+$scope module eau_ad $end
+$var wire 16 1 a [15:0] $end
+$var wire 1 $ ai $end
+$var wire 1 & clk $end
+$var wire 8 2 d [7:0] $end
+$var wire 1 ) do $end
+$var wire 8 3 h [7:0] $end
+$var wire 1 * hs $end
+$var wire 8 4 l [7:0] $end
+$var wire 1 + ls $end
+$var wire 16 5 p [15:0] $end
+$var wire 8 6 q [7:0] $end
+$var wire 1 , rst $end
+$scope module rh $end
+$var wire 1 & clk $end
+$var wire 8 7 d [7:0] $end
+$var wire 1 * en $end
+$var wire 1 , rst $end
+$var reg 8 8 q [7:0] $end
+$upscope $end
+$scope module rl $end
+$var wire 1 & clk $end
+$var wire 8 9 d [7:0] $end
+$var wire 1 + en $end
+$var wire 1 , rst $end
+$var reg 8 : q [7:0] $end
+$upscope $end
+$upscope $end
+$scope module eau_da $end
+$var wire 16 ; a [15:0] $end
+$var wire 1 % ao $end
+$var wire 1 & clk $end
+$var wire 8 < d [7:0] $end
+$var wire 1 ( di $end
+$var wire 1 * hs $end
+$var wire 1 + ls $end
+$var wire 8 = p [7:0] $end
+$var wire 1 , rst $end
+$var wire 16 > q [15:0] $end
+$scope module rh $end
+$var wire 1 & clk $end
+$var wire 8 ? d [7:0] $end
+$var wire 1 * en $end
+$var wire 1 , rst $end
+$var reg 8 @ q [7:0] $end
+$upscope $end
+$scope module rl $end
+$var wire 1 & clk $end
+$var wire 8 A d [7:0] $end
+$var wire 1 + en $end
+$var wire 1 , rst $end
+$var reg 8 B q [7:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx B
+b0 A
+bx @
+b0 ?
+bx >
+b0 =
+b0 <
+b0 ;
+bx :
+b0 9
+bx 8
+b0 7
+b0 6
+b0 5
+bx 4
+bx 3
+b0 2
+b0 1
+b0 0
+b0 /
+b0 .
+b0 -
+0,
+0+
+0*
+0)
+0(
+b0 '
+0&
+0%
+0$
+b0 #
+b0 "
+b0 !
+$end
+#10
+1&
+#20
+0&
+#30
+1&
+#40
+0&
+#50
+bx 6
+b11110001 =
+b11110001 ?
+b11110001 A
+1&
+1+
+1(
+b11110001 '
+b11110001 /
+b11110001 <
+#60
+b0 6
+bx11110001 >
+b11110001 B
+b0 4
+b0 :
+0&
+#70
+1&
+#80
+0&
+#90
+1&
+#100
+bx 6
+b10100 =
+b10100 ?
+b10100 A
+0&
+1*
+0+
+b10100 '
+b10100 /
+b10100 <
+#110
+1&
+#120
+b0 6
+b0 3
+b0 8
+b1010011110001 >
+b10100 @
+0&
+#130
+1&
+#140
+0&
+#150
+b0x0x00xxxx000x !
+b0x0x00xxxx000x .
+b0x0x00xxxx000x ;
+1&
+1%
+0*
+#160
+0&
+#170
+1&
+#180
+0&
+#190
+1&
+#200
+0&
+1,
+#210
+1&
+#220
+b0 !
+b0 .
+b0 ;
+b0 B
+b0 >
+b0 @
+0&
+#230
+1&
+#240
+0&
+#250
+1&
