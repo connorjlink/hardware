@@ -14,12 +14,6 @@ module rf
 
 wire[7:0] at, bt, ct, dt, ft;
 
-wire al = as | rst,
-     bl = bs | rst,
-     cl = cs | rst,
-     dl = ds | rst,
-     fl = fs | rst;
-
 wire aw = as && we;
 wire ar = as && re;
 register_rst r0
@@ -81,18 +75,17 @@ register_rst rf
 
 always @*
 begin
-    fod = ft;
+    fod <= ft;
 
     if (!fr)
     begin
-        p = re ? ({ 8{ as } } & at) |
-                 ({ 8{ bs } } & bt) |
-                 ({ 8{ cs } } & ct) |
-                 ({ 8{ ds } } & dt) : 8'bz;
+        p <= re ? ({ 8{ as } } & at) |
+                  ({ 8{ bs } } & bt) |
+                  ({ 8{ cs } } & ct) |
+                  ({ 8{ ds } } & dt) : 8'bz;
     end
 
-    else
-        fo = ft;
+  fo = ft & { 8{ fr } };
 end
 
 endmodule

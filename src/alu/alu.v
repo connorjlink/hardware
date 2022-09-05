@@ -1,4 +1,4 @@
-module Alu(input[7:0] a, b, fi, input[6:0] op, output[7:0] d, fo);
+module alu(input[7:0] a, b, fi, input[6:0] op, output[7:0] d, fo);
     reg[8:0] out = 0;
     reg[7:0] flags = 0;
 
