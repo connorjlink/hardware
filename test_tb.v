@@ -1,24 +1,29 @@
-`include "test.v"
-module RegisterTestbench;
+`include "register.v"
 
-reg         clock = 0;
-reg         enable = 1;
-reg  [15:0] value_in;
-wire [15:0] value_out;
+module register_tb;
 
-always #1 clock = !clock;
+reg clk = 0;
+reg en = 1;
 
-initial $dumpfile("registertestbench.vcd");
-initial $dumpvars(0, RegisterTestbench);
+reg[15:0] d;
+wire[15:0] q;
 
-Register r(clock, enable, value_in, value_out);
+always #1 clk = !clk;
 
-initial begin
-    //These events must be in chronological order.
-    # 5 value_in = 31;
-    # 5 value_in = 127;
-    # 5 enable = 0;
-    # 5 value_in = 1023;
-    # 5 $finish;
+initial $dumpfile("register_tb.vcd");
+initial $dumpvars(0, register_tb);
+
+Register r
+(
+
+);
+
+initial
+begin
+    #5 value_in = 31;
+    #5 value_in = 127;
+    #5 enable = 0;
+    #5 value_in = 1023;
+    #5 $finish;
 end
 endmodule

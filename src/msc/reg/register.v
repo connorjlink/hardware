@@ -1,4 +1,12 @@
-module register(input[7:0] d, input clk, en, output reg[7:0] q);
+module register
+(
+    input[7:0] d, 
+    
+    input en,
+    input clk,
+
+    output reg[7:0] q
+);
     always @(posedge clk)
     begin
         if (en)
@@ -6,7 +14,15 @@ module register(input[7:0] d, input clk, en, output reg[7:0] q);
     end
 endmodule
 
-module register_rst(input[7:0] d, input clk, rst, en, output reg[7:0] q);
+module register_rst
+(
+    input[7:0] d,
+    
+    input en,
+    input clk, rst,
+
+    output reg[7:0] q
+);
     always @(posedge clk)
     begin
         if (en && !rst)
