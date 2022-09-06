@@ -25,7 +25,7 @@ rom r
    .q3(q3)
 );
 
-initial 
+initial  
 begin
     #5 re = 1;
     #5 a = 32768;

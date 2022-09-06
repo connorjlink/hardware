@@ -12,8 +12,6 @@ module rom
 
 	localparam WRITE_FILE = 1;
 
-	wire[15:0] ac = { 16{ (a >= SIZE) } } & (a - SIZE);
-
 	reg[7:0] m[0:SIZE-1];
 
 	initial
@@ -29,10 +27,10 @@ module rom
 	begin
 		if (a >= SIZE && a <= (16'hFFFF - READ_SIZE) && re)
 		begin
-			q0 <= m[ac + 0];
-			q1 <= m[ac + 1];
-			q2 <= m[ac + 2];
-			q3 <= m[ac + 3];
+			q0 <= m[a + 0];
+			q1 <= m[a + 1];
+			q2 <= m[a + 2];
+			q3 <= m[a + 3];
 		end
 
 		else
