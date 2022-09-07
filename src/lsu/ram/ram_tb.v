@@ -23,22 +23,24 @@ ram r
     .re(re),
     .we(we),
     .clk(clk),
+    .rst(rst),
     .q(q)
 );
 
 initial
 begin
-    #2
-    #5 a = 0; re = 1; we = 1; d = 100;
-    #5 we = 0; re = 0;
-    #5 a = 32; re = 1; we = 1; d = 30;
-    #5 we = 0;
-    #5 a = 0; re = 1;
-    #5 a = 32;
+    #5 a = 10; re = 1;
     #5 a = 40000;
+    #5 a = 1; we = 1; d = 100;
+    #5 a = 2; we = 1; d = 30;
+    #5 a = 3; we = 0; d = 40;
+    #5 a = 1;
+    #5 a = 3;
+    #1
+    #5 a = 1;
+    #5 re = 0; a = 2;
+    #5 re = 1;
     #5 rst = 1;
-    #5 a = 0; re = 1;
-    #5 a = 32;
     #5 $finish;
 end
 

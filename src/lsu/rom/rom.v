@@ -1,6 +1,6 @@
 module rom
 (
-	input [15:0] a,
+	input[15:0] a,
 
 	input re,
 	input clk,
@@ -9,8 +9,7 @@ module rom
 );
 	localparam SIZE = 32768;
 	localparam READ_SIZE = 3;
-
-	localparam WRITE_FILE = 1;
+	localparam WRITE_FILE = 0;
 
 	reg[7:0] m[0:SIZE-1];
 
@@ -19,18 +18,19 @@ module rom
 		$readmemh("/Users/connor/desktop/cpu-design/test.o", m);
 
 		if (WRITE_FILE)
-			for (integer i = 0; i < 32768; i++)
+			for (integer i = 0; i < SIZE; i++)
 				$display("%d: %h", i, m[i]);
 	end
 
-	always @(posedge clk)
+	// TODO: create PCU that allows for posedge access only
+	always @(clk)
 	begin
 		if (a >= SIZE && a <= (16'hFFFF - READ_SIZE) && re)
 		begin
-			q0 <= m[a + 0];
-			q1 <= m[a + 1];
-			q2 <= m[a + 2];
-			q3 <= m[a + 3];
+			q0 <= m[a - SIZE + 0];
+			q1 <= m[a - SIZE + 1];
+			q2 <= m[a - SIZE + 2];
+			q3 <= m[a - SIZE + 3];
 		end
 
 		else
