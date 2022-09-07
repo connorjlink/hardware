@@ -13,6 +13,7 @@ module ram
 
     reg[7:0] m[0:SIZE-1];
 
+    //for simulation purposes only
     initial
     begin
         for (integer i = 0; i < SIZE; i++)
@@ -23,7 +24,8 @@ module ram
     begin
         if (rst)
         begin
-            
+            for (integer j = 0; j < SIZE; j++)
+                m[j] = 0;
         end
 
         else
