@@ -19,13 +19,21 @@ module pc
     reg[15:0] ac = 0;
     reg[2:0] ic = 0;
 
-    reg cv = 0;
-
     //for simulation purposes only
     initial
     begin
         ac = 16'h8000;
         ic = 3'b000;
+    end
+
+    always @*
+    begin
+        if (oe)
+            ao <= ac;
+        else
+            ao <= 16'bz;
+
+        is <= ic;
     end
 
     always @(posedge clk)
@@ -44,9 +52,6 @@ module pc
                 ac += 1;
             end
 
-            //else if (ic == 3'b110 && )
-            //begin
-
 
             if (lrc)
             begin
@@ -62,23 +67,24 @@ module pc
 
             else if (cub)
             begin
-                ic += 2;
-                ac += 1;
+                if (ic == 3'b110)
+                begin
+                    ic <= 0;
+                    ac += 1;
+                end
+
+                else
+                begin
+                    ic += 2;
+                    ac += 1;
+                end
             end
 
             else
                 ic += 1;
 
             // TODO: verify address on { 0x8000 <= a <= 0xFFFF - 3 }
-            //three is max extra instruction lengths
-
-
-
-            //output address and step
-            if (oe)
-                ao <= ac;
-
-            is <= ic;
+            //three is max extra instruction lengths      
         end
     end
 endmodule
