@@ -14,6 +14,7 @@ module eau
     initial 
     begin
         tmp <= 16'h0000;
+        q <= 16'bz;
     end
 
     always @(posedge clk)
@@ -31,14 +32,37 @@ module eau
         else
         begin
             if (wl)
-                tmp[7:0] <= d;
+            begin
+                if (oe)
+                begin
+                    tmp[7:0] <= d;
+                    q <= tmp;
+                end
+
+                else
+                begin
+                    tmp[7:0] <= d;
+                    q <= 16'bz;
+                end
+            end
 
             else if (wh)
-                tmp[15:8] <= d;
+            begin
+                if (oe)
+                begin
+                    tmp[15:8] <= d;
+                    q <= tmp;
+                end
+
+                else
+                begin
+                    tmp[15:8] <= d;
+                    q <= 16'bz;
+                end
+            end
 
             if (oe)
                 q <= tmp;
-
             else
                 q <= 16'bz;
         end
