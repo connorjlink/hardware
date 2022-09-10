@@ -1,7 +1,7 @@
 `timescale 1ns / 100ps
-`include "register.v"
+`include "reg.v"
 
-module register_tb;
+module reg_tb;
 
 reg clk = 0, rst = 0;
 reg en = 1;
@@ -11,10 +11,10 @@ wire[7:0] q;
 
 always #1 clk = !clk;
 
-initial $dumpfile("register_tb.vcd");
-initial $dumpvars(0, register_tb);
+initial $dumpfile("reg_tb.vcd");
+initial $dumpvars(0, reg_tb);
 
-register_rst r
+reg_rst r
 (
     .d(d),
     .en(en),

@@ -1,4 +1,4 @@
-module register
+module reg_std
 (
     input[7:0] d, 
     
@@ -14,7 +14,7 @@ module register
     end
 endmodule
 
-module register_rst
+module reg_rst
 (
     input[7:0] d,
     

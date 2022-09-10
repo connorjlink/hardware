@@ -1,4 +1,4 @@
-`include "../util/register.v"
+`include "..msc/reg/reg.v"
 
 module rf
 (

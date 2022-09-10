@@ -50,10 +50,4 @@ sp sp_inst
     .q(sp_val)
 );
 
-    always @(posedge clk)
-    begin
-        
-    end
-
-
 endmodule
