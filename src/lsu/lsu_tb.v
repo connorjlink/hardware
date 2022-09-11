@@ -13,6 +13,7 @@ module lsu_tb;
 
     wire[7:0] q, q1, q2, q3;
     wire[7:0] fo;
+    wire[15:0] spq;
 
 always #1 clk = !clk;
 
@@ -34,26 +35,28 @@ lsu u
     .q1(q1),
     .q2(q2),
     .q3(q3),
-    .fo(fo)
+    .fo(fo),
+    .spq(spq)
 );
 
 initial
 begin
     #5 a = 32768; re = 1; 
     #5 a = 32769; re = 1;
-    #5 re = 0;
+    #5 re = 1;
     #5 a = 0; d = 100; we = 1;
     #5 re = 1; we = 0;
     #5 a = 30; d = 48; we = 1;
-    #5 we = 0;
+    #5 we = 0; d = 0;
     #5 re = 1; a = 0;
+    #5 a = 30;
     #5 re = 0; sp_en = 1; sp_d = 1; sp_we = 1;
     #5
     #5
     #5 sp_d = 0;
     #5
     #5 rst = 1;
-    #5 rst = 0; we = 0; re = 1; sp_en = 0; sp_we = 0;
+    #5 rst = 0; we = 0; re = 1; sp_d = 1; //sp_en = 0; sp_we = 0;
     #5 a = 0;
     #5 $finish;
 end

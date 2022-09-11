@@ -14,10 +14,13 @@ module lsu
     input re, we, 
 
     output[7:0] q, q1, q2, q3, 
-    output[7:0] fo
+    output[7:0] fo,
+    output[15:0] spq
 );
 
     wire[15:0] sp_val;
+
+    assign spq = sp_val;
 
 ram ram_inst
 (

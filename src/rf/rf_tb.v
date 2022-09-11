@@ -34,7 +34,10 @@ rf r
 
 initial
 begin
-
+    #5 re = 1; we = 1; as = 1; d = 100;
+    #5 d = 30; as = 0; bs = 1;
+    #5 d = 54; bs = 0; ds = 1;
+    #5 we = 0; ds = 0;
 
     #5 $finish;
 end
