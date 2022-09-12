@@ -25,8 +25,11 @@ module alu
     begin
         if (rst)
         begin
-            out = 0;
-            flags = 0;
+            out <= 0;
+            d <= 0;
+
+            flags <= 0;
+            fo <= 0;
         end
 
         else
@@ -37,50 +40,59 @@ module alu
             case (op)
                 7'b0000001: //addition
                 begin
-                    out <= ai + bi + { 8'h00, fi[CARRY] };
-                    flags[CARRY] <= out[8];
+                    out = ai + bi + { 8'h00, fi[CARRY] };
+                    flags[CARRY] = out[8];
                 end
 
                 7'b0000010: //subtraction
                 begin
-                    out <= ai - bi - { 8'h00, fi[CARRY] };
-                    flags[CARRY] <= out[8];
+                    out = ai - bi - { 8'h00, fi[CARRY] };
+                    flags[CARRY] = out[8];
                 end
 
                 7'b0000100: //bitwise and
                 begin
-                    out <= ai & bi;
+                    out = ai & bi;
+                    flags[CARRY] = 0;
                 end
 
                 7'b0001000: //bitwise or
                 begin
-                    out <= ai | bi;
+                    out = ai | bi;
+                    flags[CARRY] = 0;
                 end
 
                 7'b0010000: //bitwise not
                 begin
-                    out <= ~ai;
+                    out = ~ai;
+                    flags[CARRY] = 0;
                 end
 
                 7'b0100000: //left shift
                 begin
-                    out <= ai << bi;
+                    out = a << b;
+                    flags[CARRY] = 0;
                 end
 
                 7'b1000000: //right shift
                 begin
-                    out <= ai >> bi;
+                    out = a >> b;
+                    flags[CARRY] = 0;
                 end
 
-                default: out <= 0;
+                default:
+                begin
+                    out = 0;
+                    flags[CARRY] = 0;
+                end
             endcase
 
-            flags[1] <= (out[7:0] == 0);
+            flags[1] = (out[7:0] == 0);
             tmp = out[7:0];
-            flags[2] <= (tmp > 0);
+            flags[2] = (tmp > 0);
 
-            d <= out[7:0];
-            fo <= flags;
+            d = out[7:0];
+            fo = flags;
         end
     end
 endmodule
