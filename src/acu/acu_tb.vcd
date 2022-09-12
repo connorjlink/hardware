@@ -1,5 +1,5 @@
 $date
-	Thu Sep  8 16:23:23 2022
+	Sun Sep 11 22:18:37 2022
 $end
 $version
 	Icarus Verilog
@@ -7,7 +7,7 @@ $end
 $timescale
 	100ps
 $end
-$scope module eau_tb $end
+$scope module acu_tb $end
 $var wire 16 ! q [15:0] $end
 $var reg 1 " clk $end
 $var reg 8 # d [7:0] $end
@@ -15,7 +15,7 @@ $var reg 1 $ oe $end
 $var reg 1 % rst $end
 $var reg 1 & wh $end
 $var reg 1 ' wl $end
-$scope module e $end
+$scope module a $end
 $var wire 1 " clk $end
 $var wire 8 ( d [7:0] $end
 $var wire 1 $ oe $end

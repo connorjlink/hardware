@@ -1,7 +1,7 @@
 `timescale 1ns / 100ps
-`include "eau.v"
+`include "acu.v"
 
-module eau_tb;
+module acu_tb;
     reg clk = 0, rst = 0;
     reg wl = 0, wh = 0;
     reg oe = 0;
@@ -12,10 +12,10 @@ module eau_tb;
 
 always #1 clk = !clk;
 
-initial $dumpfile("eau_tb.vcd");
-initial $dumpvars(0, eau_tb);
+initial $dumpfile("acu_tb.vcd");
+initial $dumpvars(0, acu_tb);
 
-eau e
+acu a
 (
     .d(d),
     .clk(clk),
