@@ -26,7 +26,18 @@ alu alu
 
 initial
 begin
-    
+    #5 a = 1; b = 100; fi = 0; op = 0;
+    #5 op = 1;
+    #5 op = 2;
+    #5 op = 3;
+    #5 op = 4;
+    #1
+    #5 op = 8;
+    #5 op = 16;
+    #5 op = 32;
+    #5 op = 64;
+    #5 op = 65;
+    #5 $finish;
 end
 
 endmodule
