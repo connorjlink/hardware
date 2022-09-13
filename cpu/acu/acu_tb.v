@@ -15,7 +15,7 @@ always #1 clk = !clk;
 initial $dumpfile("acu_tb.vcd");
 initial $dumpvars(0, acu_tb);
 
-acu a
+acu cu
 (
     .d(d),
     .clk(clk),

@@ -21,12 +21,12 @@ module acu
     begin
         if (rst)
         begin
-            tmp <= 16'h0000;
+            tmp = 16'h0000;
 
             if (oe)
-                q <= tmp;
+                q = tmp;
             else 
-                q <= 16'bz;
+                q = 16'bz;
         end
 
         else
@@ -35,14 +35,14 @@ module acu
             begin
                 if (oe)
                 begin
-                    tmp[7:0] <= d;
-                    q <= tmp;
+                    tmp[7:0] = d;
+                    q = tmp;
                 end
 
                 else
                 begin
-                    tmp[7:0] <= d;
-                    q <= 16'bz;
+                    tmp[7:0] = d;
+                    q = 16'bz;
                 end
             end
 
@@ -50,21 +50,21 @@ module acu
             begin
                 if (oe)
                 begin
-                    tmp[15:8] <= d;
-                    q <= tmp;
+                    tmp[15:8] = d;
+                    q = tmp;
                 end
 
                 else
                 begin
-                    tmp[15:8] <= d;
-                    q <= 16'bz;
+                    tmp[15:8] = d;
+                    q = 16'bz;
                 end
             end
 
             if (oe)
-                q <= tmp;
+                q = tmp;
             else
-                q <= 16'bz;
+                q = 16'bz;
         end
     end
 
