@@ -1,0 +1,120 @@
+$date
+	Thu Sep 15 19:18:51 2022
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	100ps
+$end
+$scope module db_tb $end
+$var wire 7 ! rf [6:0] $end
+$var wire 4 " pc [3:0] $end
+$var wire 5 # lsu [4:0] $end
+$var wire 2 $ len [1:0] $end
+$var wire 1 % ir_we $end
+$var wire 10 & alu [9:0] $end
+$var wire 3 ' adu [2:0] $end
+$var wire 3 ( acu [2:0] $end
+$var reg 1 ) clk $end
+$var reg 8 * d1 [7:0] $end
+$var reg 8 + d2 [7:0] $end
+$var reg 8 , d3 [7:0] $end
+$var reg 8 - insn [7:0] $end
+$var reg 3 . is [2:0] $end
+$var reg 1 / rst $end
+$scope module d $end
+$var wire 1 ) clk $end
+$var wire 8 0 d1 [7:0] $end
+$var wire 8 1 d2 [7:0] $end
+$var wire 8 2 d3 [7:0] $end
+$var wire 8 3 insn [7:0] $end
+$var wire 3 4 is [2:0] $end
+$var wire 1 / rst $end
+$var wire 1 5 addr $end
+$var reg 3 6 acu [2:0] $end
+$var reg 3 7 adu [2:0] $end
+$var reg 10 8 alu [9:0] $end
+$var reg 1 % ir_we $end
+$var reg 2 9 len [1:0] $end
+$var reg 5 : lsu [4:0] $end
+$var reg 4 ; pc [3:0] $end
+$var reg 7 < rf [6:0] $end
+$var reg 48 = tmp [47:0] $end
+$scope begin $ivl_for_loop0 $end
+$var integer 32 > i [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b100000000 >
+bx =
+bx <
+bx ;
+bx :
+bx 9
+bx 8
+bx 7
+bx 6
+05
+b0 4
+b0 3
+b0 2
+b0 1
+b0 0
+0/
+b0 .
+b0 -
+b0 ,
+b0 +
+b0 *
+0)
+bx (
+bx '
+bx &
+x%
+bx $
+bx #
+bx "
+bx !
+$end
+#10
+1)
+#20
+0)
+#30
+1)
+#40
+0)
+#50
+1)
+#60
+0)
+#70
+1)
+#80
+0)
+#90
+1)
+#100
+0)
+b1000000 ,
+b1000000 2
+b110010 +
+b110010 1
+b1100100 *
+b1100100 0
+b1101 -
+b1101 3
+#110
+1)
+#120
+0)
+#130
+1)
+#140
+0)
+#150
+1)

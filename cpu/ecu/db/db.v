@@ -72,6 +72,8 @@ module db
                adu_oe, // 32
     */
 
+    //more outputs here 
+
     output reg[1:0] len
 );
 
@@ -84,6 +86,9 @@ module db
 
     reg[UCODE_WIDTH-1:0] ucode[0:UCODE_LENGTH-1];
 
+    wire addr = (insn * UCODE_STEPS) + is;
+    reg[UCODE_WIDTH-1:0] tmp;
+
     initial 
     begin
         $readmemh("/Users/connor/desktop/cpu-design/ucode.bin", ucode);
@@ -95,9 +100,23 @@ module db
 
     always @(negedge clk)
     begin
+        if (rst)
+            tmp = 48'b0;
 
+        else
+        begin
+            tmp = ucode[addr];
 
+            rf    <= tmp[6:0];
+            lsu   <= tmp[11:7];
+            alu   <= tmp[21:12];
+            ir_we <= tmp[22];
+            pc    <= tmp[26:23];
+            acu   <= tmp[29:27];
+            adu   <= tmp[32:30];
 
+            len   <= tmp[47:46]; 
+        end
     end
 
 endmodule
