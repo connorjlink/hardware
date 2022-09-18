@@ -4,7 +4,8 @@
 
 module ecu
 (
-    input[15:0] a,
+    input[15:0] ai,
+    input[31:0] raw,
     input clk, rst,
 
     output[6:0] rf,
@@ -12,10 +13,10 @@ module ecu
     output[9:0] alu,
 
     output[2:0] acu,
-    output[2:0] adu
-);
+    output[2:0] adu,
 
-reg[31:0] raw;
+    output[15:0] ao
+);
 
 wire ir_we;
 wire[3:0] pc_ctl_lines;
@@ -25,6 +26,7 @@ wire[7:0] insn, d1, d2, d3;
 wire[2:0] is;
 
 wire[15:0] pc_out;
+assign ao = pc_out;
 
 ir ir_inst
 (
@@ -41,7 +43,7 @@ ir ir_inst
 
 pc pc_inst
 (
-    .ai(a),
+    .ai(ai),
     .clk(clk),
     .rst(rst),
     .lrc(pc_ctl_lines[3]),
@@ -69,11 +71,5 @@ db db_inst
     .adu(adu),
     .len(len)
 );
-
-
-always @(negedge clk)
-begin
-
-end
 
 endmodule

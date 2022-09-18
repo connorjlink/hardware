@@ -44,6 +44,8 @@ initial
 begin
     #5
     #5 insn = 13; d1 = 100; d2 = 50; d3 = 64;
+    #1
+    #5 insn = 24;
     #5 $finish;
 end
 
