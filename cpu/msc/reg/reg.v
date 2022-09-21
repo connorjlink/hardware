@@ -23,11 +23,17 @@ module reg_rst
 
     output reg[7:0] q
 );
+    initial
+    begin
+        q <= 8'b0;
+    end
+
     always @(posedge clk)
     begin
-        if (rst)
-            q <= 8'b0;
-        else if (we)
+        
+        if (we && !rst)
             q <= d;
+        else if (rst)
+            q <= 8'b0;
     end
 endmodule

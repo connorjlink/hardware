@@ -38,13 +38,16 @@ rf r
 
 initial
 begin
-    #5 d = 100; ai = 1; bi = 1;
+    #4 rst = 1;
+    #5 rst = 0;
+    #5 d = 100; ai = 1; bi = 1; ao = 1;
     #5 d = 0; ai = 0; bi = 0; ao = 1;
     #5 ao = 0; bo = 1;
     #5 bo = 0; d = 64; ci = 1;
     #5 ci = 0; co = 1; d = 4; fi = 1;
     #5 d = 0; fi = 0; co = 0; fo = 1;
     #5 fo = 0;
+    #1
     #5 rst = 1;
     #5 $finish;
 end

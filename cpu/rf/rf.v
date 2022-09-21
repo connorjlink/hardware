@@ -9,7 +9,7 @@ module rf
 
     input clk, rst,
 
-    output reg[7:0] p, fq, fod
+    output[7:0] p, fq, fod
 );
 
 wire[7:0] ap, bp, cp, dp, fp;
@@ -19,7 +19,7 @@ reg_rst ar
     .d(d),
     .clk(clk),
     .rst(rst),
-    .en(ai),
+    .we(ai),
     .q(ap)
 );
 
@@ -28,7 +28,7 @@ reg_rst br
     .d(d),
     .clk(clk),
     .rst(rst),
-    .en(bi),
+    .we(bi),
     .q(bp)
 );
 
@@ -37,7 +37,7 @@ reg_rst cr
     .d(d),
     .clk(clk),
     .rst(rst),
-    .en(ci),
+    .we(ci),
     .q(cp)
 );
 
@@ -46,7 +46,7 @@ reg_rst dr
     .d(d),
     .clk(clk),
     .rst(rst),
-    .en(di),
+    .we(di),
     .q(dp)
 );
 
@@ -55,37 +55,16 @@ reg_rst fr
     .d(d),
     .clk(clk),
     .rst(rst),
-    .en(fi),
+    .we(fi),
     .q(fp)
 );
 
-wire want_output = (ao | bo | co | do | fo);
+assign p = ao ? ap : 
+           bo ? bp : 
+           co ? cp : 
+           do ? dp : 8'bz;
 
-always @(posedge clk)
-begin
-    fod <= fp;
-
-    if (!fo)
-    begin
-        if (want_output)
-        begin
-                 if (ao) p <= ap;
-            else if (bo) p <= bp;
-            else if (co) p <= cp;
-            else if (do) p <= dp;
-            else if (fo) p <= fp;
-        end
-
-        else
-            p <= 8'bz;
-            
-        fq <= 8'bz;
-    end
-
-    else
-    begin
-        fq <= fp;
-    end 
-end
+assign fq = fo ? fp : 8'bz;
+assign fod = fp;
 
 endmodule

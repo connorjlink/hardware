@@ -1,5 +1,5 @@
 $date
-	Tue Sep 20 17:49:10 2022
+	Tue Sep 20 20:19:17 2022
 $end
 $version
 	Icarus Verilog
@@ -37,75 +37,73 @@ $var wire 1 , di $end
 $var wire 1 - do $end
 $var wire 1 . fi $end
 $var wire 1 / fo $end
+$var wire 8 2 fod [7:0] $end
 $var wire 1 0 rst $end
-$var wire 1 2 want_output $end
-$var wire 8 3 fp [7:0] $end
-$var wire 8 4 dp [7:0] $end
-$var wire 8 5 cp [7:0] $end
-$var wire 8 6 bp [7:0] $end
-$var wire 8 7 ap [7:0] $end
-$var reg 8 8 fod [7:0] $end
-$var reg 8 9 fq [7:0] $end
-$var reg 8 : p [7:0] $end
+$var wire 8 3 p [7:0] $end
+$var wire 8 4 fq [7:0] $end
+$var wire 8 5 fp [7:0] $end
+$var wire 8 6 dp [7:0] $end
+$var wire 8 7 cp [7:0] $end
+$var wire 8 8 bp [7:0] $end
+$var wire 8 9 ap [7:0] $end
 $scope module ar $end
 $var wire 1 ) clk $end
-$var wire 8 ; d [7:0] $end
-$var wire 1 $ en $end
+$var wire 8 : d [7:0] $end
 $var wire 1 0 rst $end
-$var reg 8 < q [7:0] $end
+$var wire 1 $ we $end
+$var reg 8 ; q [7:0] $end
 $upscope $end
 $scope module br $end
 $var wire 1 ) clk $end
-$var wire 8 = d [7:0] $end
-$var wire 1 & en $end
+$var wire 8 < d [7:0] $end
 $var wire 1 0 rst $end
-$var reg 8 > q [7:0] $end
+$var wire 1 & we $end
+$var reg 8 = q [7:0] $end
 $upscope $end
 $scope module cr $end
 $var wire 1 ) clk $end
-$var wire 8 ? d [7:0] $end
-$var wire 1 ( en $end
+$var wire 8 > d [7:0] $end
 $var wire 1 0 rst $end
-$var reg 8 @ q [7:0] $end
+$var wire 1 ( we $end
+$var reg 8 ? q [7:0] $end
 $upscope $end
 $scope module dr $end
 $var wire 1 ) clk $end
-$var wire 8 A d [7:0] $end
-$var wire 1 , en $end
+$var wire 8 @ d [7:0] $end
 $var wire 1 0 rst $end
-$var reg 8 B q [7:0] $end
+$var wire 1 , we $end
+$var reg 8 A q [7:0] $end
 $upscope $end
 $scope module fr $end
 $var wire 1 ) clk $end
-$var wire 8 C d [7:0] $end
-$var wire 1 . en $end
+$var wire 8 B d [7:0] $end
 $var wire 1 0 rst $end
-$var reg 8 D q [7:0] $end
+$var wire 1 . we $end
+$var reg 8 C q [7:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-bx D
 b0 C
-bx B
+b0 B
 b0 A
-bx @
+b0 @
 b0 ?
-bx >
+b0 >
 b0 =
-bx <
+b0 <
 b0 ;
-bx :
-bx 9
-bx 8
-bx 7
-bx 6
-bx 5
-bx 4
-bx 3
-02
+b0 :
+b0 9
+b0 8
+b0 7
+b0 6
+b0 5
+bz 4
+bz 3
+b0 2
 b0 1
 00
 0/
@@ -120,15 +118,11 @@ b0 +
 0&
 0%
 0$
-bx #
-bx "
-bx !
+b0 #
+bz "
+bz !
 $end
 #10
-bz "
-bz 9
-bz !
-bz :
 1)
 #20
 0)
@@ -136,21 +130,9 @@ bz :
 1)
 #40
 0)
+10
 #50
-b1100100 7
-b1100100 <
-b1100100 6
-b1100100 >
 1)
-1&
-1$
-b1100100 +
-b1100100 1
-b1100100 ;
-b1100100 =
-b1100100 ?
-b1100100 A
-b1100100 C
 #60
 0)
 #70
@@ -159,33 +141,37 @@ b1100100 C
 0)
 #90
 1)
+00
 #100
-12
 0)
-1%
-0&
-0$
-b0 +
-b0 1
-b0 ;
-b0 =
-b0 ?
-b0 A
-b0 C
 #110
-b1100100 !
-b1100100 :
 1)
 #120
 0)
 #130
 1)
 #140
+b0 !
+b0 3
 0)
+1%
+1&
+1$
+b1100100 +
+b1100100 1
+b1100100 :
+b1100100 <
+b1100100 >
+b1100100 @
+b1100100 B
 #150
+b1100100 !
+b1100100 3
+b1100100 8
+b1100100 =
+b1100100 9
+b1100100 ;
 1)
-1'
-0%
 #160
 0)
 #170
@@ -194,87 +180,80 @@ b1100100 :
 0)
 #190
 1)
+0&
+0$
+b0 +
+b0 1
+b0 :
+b0 <
+b0 >
+b0 @
+b0 B
 #200
-02
 0)
-1(
-b1000000 +
-b1000000 1
-b1000000 ;
-b1000000 =
-b1000000 ?
-b1000000 A
-b1000000 C
-0'
 #210
-b1000000 5
-b1000000 @
-bz !
-bz :
 1)
 #220
 0)
 #230
 1)
 #240
+b1100100 !
+b1100100 3
 0)
+1'
+0%
 #250
-b100 3
-b100 D
-12
 1)
-1.
-b100 +
-b100 1
-b100 ;
-b100 =
-b100 ?
-b100 A
-b100 C
-1*
-0(
 #260
 0)
 #270
-b1000000 !
-b1000000 :
-b100 #
-b100 8
 1)
 #280
 0)
 #290
+b1000000 7
+b1000000 ?
+bz !
+bz 3
 1)
+1(
+b1000000 +
+b1000000 1
+b1000000 :
+b1000000 <
+b1000000 >
+b1000000 @
+b1000000 B
+0'
 #300
 0)
-1/
-0*
-0.
-b0 +
-b0 1
-b0 ;
-b0 =
-b0 ?
-b0 A
-b0 C
 #310
-b100 "
-b100 9
 1)
 #320
 0)
 #330
 1)
 #340
+b1000000 !
+b1000000 3
 0)
+1.
+b100 +
+b100 1
+b100 :
+b100 <
+b100 >
+b100 @
+b100 B
+1*
+0(
 #350
-bz "
-bz 9
-bz !
-bz :
-02
+b100 #
+b100 2
+b100 5
+b100 C
 1)
-0/
 #360
 0)
 #370
@@ -282,29 +261,64 @@ bz :
 #380
 0)
 #390
+bz !
+bz 3
+b100 "
+b100 4
 1)
+1/
+0*
+0.
+b0 +
+b0 1
+b0 :
+b0 <
+b0 >
+b0 @
+b0 B
 #400
 0)
-10
 #410
-b0 7
-b0 <
-b0 6
-b0 >
-b0 5
-b0 @
-b0 4
-b0 B
-b0 3
-b0 D
 1)
 #420
 0)
 #430
-b0 #
-b0 8
 1)
 #440
+bz "
+bz 4
 0)
+0/
 #450
+1)
+#460
+0)
+#470
+1)
+#480
+0)
+#490
+1)
+#500
+0)
+10
+#510
+b0 #
+b0 2
+b0 5
+b0 C
+b0 7
+b0 ?
+b0 8
+b0 =
+b0 9
+b0 ;
+1)
+#520
+0)
+#530
+1)
+#540
+0)
+#550
 1)
