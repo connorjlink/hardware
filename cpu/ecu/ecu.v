@@ -46,10 +46,10 @@ pc pc_inst
     .ai(ai),
     .clk(clk),
     .rst(rst),
-    .lrc(pc_ctl_lines[3]),
-    .ini(pc_ctl_lines[2]),
-    .cub(pc_ctl_lines[1]),
-    .oe(pc_ctl_lines[0]),
+    .lrc(pc_ctl_lines[0]),
+    .ini(pc_ctl_lines[1]),
+    .cub(pc_ctl_lines[2]),
+    .oe(pc_ctl_lines[3]),
     .ao(pc_out),
     .is(is)
 );

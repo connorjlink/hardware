@@ -38,10 +38,11 @@ rf r
 
 initial
 begin
-    #4 rst = 1;
+    #1 rst = 1;
     #5 rst = 0;
-    #5 d = 100; ai = 1; bi = 1; ao = 1;
-    #5 d = 0; ai = 0; bi = 0; ao = 1;
+    #5 d = 100; ai = 1; bi = 1; ao = 0;
+    #3 ao = 1;
+    #5 d = 0; ai = 0; bi = 0; ao = 0;
     #5 ao = 0; bo = 1;
     #5 bo = 0; d = 64; ci = 1;
     #5 ci = 0; co = 1; d = 4; fi = 1;
