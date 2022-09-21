@@ -17,7 +17,6 @@ module lsu
     output[7:0] fo,
     output[15:0] spq
 );
-
     wire[15:0] sp_val;
 
     assign spq = sp_val;

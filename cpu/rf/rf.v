@@ -1,91 +1,91 @@
-`include "..msc/reg/reg.v"
+`include "../msc/reg/reg.v"
 
 module rf
 (
     input[7:0] d,
     
-    input as, bs, cs, ds, fs,
+    input ai, bi, ci, di, fi,
+    input ao, bo, co, do, fo,
 
-    input re, we,
     input clk, rst,
 
-    output reg[7:0] p, fo, fod
+    output reg[7:0] p, fq, fod
 );
 
-wire[7:0] at, bt, ct, dt, ft;
+wire[7:0] ap, bp, cp, dp, fp;
 
-wire aw = as && we;
-wire ar = as && re;
-register_rst r0
+reg_rst ar
 (
     .d(d),
     .clk(clk),
     .rst(rst),
-    .en(aw),
-    .q(at)
+    .en(ai),
+    .q(ap)
 );
 
-
-wire bw = bs && we;
-wire br = bs && re;
-register_rst r1
+reg_rst br
 (
     .d(d),
     .clk(clk),
     .rst(rst),
-    .en(bw),
-    .q(bt)
+    .en(bi),
+    .q(bp)
 );
 
-
-wire cw = cs && we;
-wire cr = cs && re;
-register_rst r2
+reg_rst cr
 (
     .d(d),
     .clk(clk),
     .rst(rst),
-    .en(cw),
-    .q(ct)
+    .en(ci),
+    .q(cp)
 );
 
-
-wire dw = ds && we;
-wire dr = ds && re;
-register_rst r3
+reg_rst dr
 (
     .d(d),
     .clk(clk),
     .rst(rst),
-    .en(dw),
-    .q(dt)
+    .en(di),
+    .q(dp)
 );
 
-
-wire fw = fs && we;
-wire fr = fs && re;
-register_rst rf
+reg_rst fr
 (
     .d(d),
     .clk(clk),
     .rst(rst),
-    .en(fw),
-    .q(ft)
+    .en(fi),
+    .q(fp)
 );
 
-always @*
+wire want_output = (ao | bo | co | do | fo);
+
+always @(posedge clk)
 begin
-    fod <= ft;
+    fod <= fp;
 
-    if (!fr)
+    if (!fo)
     begin
-        p <= re ? ({ 8{ as } } & at) |
-                  ({ 8{ bs } } & bt) |
-                  ({ 8{ cs } } & ct) |
-                  ({ 8{ ds } } & dt) : 8'bz;
+        if (want_output)
+        begin
+                 if (ao) p <= ap;
+            else if (bo) p <= bp;
+            else if (co) p <= cp;
+            else if (do) p <= dp;
+            else if (fo) p <= fp;
+        end
+
+        else
+            p <= 8'bz;
+            
+        fq <= 8'bz;
     end
 
-  fo = ft & { 8{ fr } };
+    else
+    begin
+        fq <= fp;
+    end 
 end
 
 endmodule

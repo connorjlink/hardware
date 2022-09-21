@@ -77,7 +77,7 @@ module db
     output reg[1:0] len
 );
 
-    localparam UCODE_WIDTH = 48;
+    localparam UCODE_WIDTH = 64;
     localparam UCODE_ENTRIES = 256;
     localparam UCODE_STEPS = 8;
     localparam UCODE_LENGTH = UCODE_ENTRIES * UCODE_STEPS;
@@ -101,7 +101,7 @@ module db
     always @(negedge clk)
     begin
         if (rst)
-            tmp = 48'b0;
+            tmp = 64'b0;
 
         else
         begin
@@ -115,7 +115,7 @@ module db
             acu   <= tmp[29:27];
             adu   <= tmp[32:30];
 
-            len   <= tmp[47:46]; 
+            len   <= tmp[63:62]; 
         end
     end
 

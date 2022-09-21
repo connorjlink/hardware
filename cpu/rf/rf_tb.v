@@ -3,12 +3,13 @@
 
 module rf_tb;
     reg[7:0] d = 0;
-    reg as = 0, bs = 0, cs = 0, ds = 0, fs = 0;
-    reg re = 0, we = 0;
+
+    reg ai = 0, bi = 0, ci = 0, di = 0, fi = 0;
+    reg ao = 0, bo = 0, co = 0, do = 0, fo = 0;
 
     reg clk = 0, rst = 0;
 
-    wire[7:0] p, fo, fod;
+    wire[7:0] p, fq, fod;
 
 always #1 clk = !clk;
 
@@ -18,27 +19,33 @@ initial $dumpvars(0, rf_tb);
 rf r
 (
     .d(d),
-    .as(as),
-    .bs(bs),
-    .cs(cs),
-    .ds(ds),
-    .fs(fs),
-    .re(re),
-    .we(we),
+    .ai(ai),
+    .bi(bi),
+    .ci(ci),
+    .di(di),
+    .fi(fi),
+    .ao(ao),
+    .bo(bo),
+    .co(co),
+    .do(do),
+    .fo(fo),
     .clk(clk),
     .rst(rst),
     .p(p),
-    .fo(fo),
+    .fq(fq),
     .fod(fod)
 );
 
 initial
 begin
-    #5 re = 1; we = 1; as = 1; d = 100;
-    #5 d = 30; as = 0; bs = 1;
-    #5 d = 54; bs = 0; ds = 1;
-    #5 we = 0; ds = 0;
-
+    #5 d = 100; ai = 1; bi = 1;
+    #5 d = 0; ai = 0; bi = 0; ao = 1;
+    #5 ao = 0; bo = 1;
+    #5 bo = 0; d = 64; ci = 1;
+    #5 ci = 0; co = 1; d = 4; fi = 1;
+    #5 d = 0; fi = 0; co = 0; fo = 1;
+    #5 fo = 0;
+    #5 rst = 1;
     #5 $finish;
 end
 

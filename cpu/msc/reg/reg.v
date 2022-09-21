@@ -18,16 +18,16 @@ module reg_rst
 (
     input[7:0] d,
     
-    input en,
+    input we,
     input clk, rst,
 
     output reg[7:0] q
 );
     always @(posedge clk)
     begin
-        if (en && !rst)
+        if (rst)
+            q <= 8'b0;
+        else if (we)
             q <= d;
-        else if (rst)
-            q <= 8'h00;
     end
 endmodule
