@@ -4,9 +4,8 @@ module adu
 
     input we,
     input rl, rh,
-    input clk, rst,
 
-    input oe,
+    input clk, rst,
 
     output reg[7:0] q
 );
@@ -23,11 +22,7 @@ module adu
         if (rst)
         begin
             tmp = 16'h0000;
-
-            if (oe)
-                q = tmp;
-            else
-                q = 16'bz;
+            q = 8'bz;
         end
 
         else
@@ -36,20 +31,10 @@ module adu
                 tmp = a;
 
             if (rl)
-            begin
-                if (oe)
-                    q = tmp[7:0];
-                else
-                    q = 8'bz;
-            end
+                q = tmp[7:0];
 
             else if (rh)
-            begin
-                if (oe)
-                    q = tmp[15:8];
-                else 
-                    q = 8'bz;
-            end
+                q = tmp[15:8];
 
             else
                 q = 8'bz;

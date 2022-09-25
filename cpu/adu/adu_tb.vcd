@@ -1,5 +1,5 @@
 $date
-	Mon Sep 12 19:12:01 2022
+	Sat Sep 24 22:36:54 2022
 $end
 $version
 	Icarus Verilog
@@ -11,30 +11,27 @@ $scope module adu_tb $end
 $var wire 8 ! q [7:0] $end
 $var reg 16 " a [15:0] $end
 $var reg 1 # clk $end
-$var reg 1 $ oe $end
-$var reg 1 % rh $end
-$var reg 1 & rl $end
-$var reg 1 ' rst $end
-$var reg 1 ( we $end
+$var reg 1 $ rh $end
+$var reg 1 % rl $end
+$var reg 1 & rst $end
+$var reg 1 ' we $end
 $scope module du $end
-$var wire 16 ) a [15:0] $end
+$var wire 16 ( a [15:0] $end
 $var wire 1 # clk $end
-$var wire 1 $ oe $end
-$var wire 1 % rh $end
-$var wire 1 & rl $end
-$var wire 1 ' rst $end
-$var wire 1 ( we $end
-$var reg 8 * q [7:0] $end
-$var reg 16 + tmp [15:0] $end
+$var wire 1 $ rh $end
+$var wire 1 % rl $end
+$var wire 1 & rst $end
+$var wire 1 ' we $end
+$var reg 8 ) q [7:0] $end
+$var reg 16 * tmp [15:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-b0 +
-bz *
-b0 )
-0(
+b0 *
+bz )
+b0 (
 0'
 0&
 0%
@@ -52,12 +49,11 @@ $end
 #40
 0#
 #50
-b111101000001110 +
+b111101000001110 *
 1#
-1$
-1(
+1'
 b111101000001110 "
-b111101000001110 )
+b111101000001110 (
 #60
 0#
 #70
@@ -68,11 +64,11 @@ b111101000001110 )
 1#
 #100
 0#
-1&
-0(
+1%
+0'
 #110
 b1110 !
-b1110 *
+b1110 )
 1#
 #120
 0#
@@ -82,16 +78,13 @@ b1110 *
 0#
 #150
 b1111010 !
-b1111010 *
+b1111010 )
 1#
-1%
-0&
+1$
+0%
 #160
 0#
-0$
 #170
-bz !
-bz *
 1#
 #180
 0#
@@ -100,11 +93,13 @@ bz *
 #200
 0#
 #210
-b100111000100000 +
+b1001110 !
+b1001110 )
+b100111000100000 *
 1#
-1(
+1'
 b100111000100000 "
-b100111000100000 )
+b100111000100000 (
 #220
 0#
 #230
@@ -115,10 +110,7 @@ b100111000100000 )
 1#
 #260
 0#
-1$
 #270
-b1001110 !
-b1001110 *
 1#
 #280
 0#
@@ -128,7 +120,7 @@ b1001110 *
 0#
 #310
 1#
-0(
+0'
 #320
 0#
 #330
@@ -139,10 +131,7 @@ b1001110 *
 1#
 #360
 0#
-0$
 #370
-bz !
-bz *
 1#
 #380
 0#
@@ -151,9 +140,11 @@ bz *
 #400
 0#
 #410
+b100000 !
+b100000 )
 1#
-1&
-0%
+1%
+0$
 #420
 0#
 #430
@@ -164,10 +155,7 @@ bz *
 1#
 #460
 0#
-1$
 #470
-b100000 !
-b100000 *
 1#
 #480
 0#
@@ -176,11 +164,11 @@ b100000 *
 #500
 0#
 #510
-b0 !
+bz !
+bz )
 b0 *
-b0 +
 1#
-1'
+1&
 #520
 0#
 #530
@@ -191,8 +179,10 @@ b0 +
 1#
 #560
 0#
-0'
+0&
 #570
+b0 !
+b0 )
 1#
 #580
 0#
