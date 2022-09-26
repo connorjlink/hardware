@@ -10,10 +10,11 @@ module cpu
     input clk, rst
 );
 
-wire[7:0] db, 
-wire[16:0] ab;
+wire[7:0] db, fb;
+wire[15:0] ab;
 
-wire[16:0] pc;
+wire[15:0] sp;
+wire[15:0] pc;
 wire[2:0] is;
 
 wire[31:0] rom_raw;
@@ -79,12 +80,41 @@ ecu ecu_inst
 
 lsu lsu_inst
 (
-
+    .d(db),
+    .a(ab),
+    .clk(clk),
+    .rst(rst),
+    .sp_d(lsu_ctl[0]),
+    .sp_we(lsu_ctl[1]),
+    .sp_en(lsu_ctl[2]),
+    .re(lsu_ctl[3]),
+    .we(lsu_ctl[4]),
+    .q(rom_raw[7:0]),
+    .q1(rom_raw[15:8]),
+    .q2(rom_raw[23:16]),
+    .q3(rom_raw[31:24]),
+    .fo(fb),
+    .spq(sp)
 );
 
 rf rf_inst
 (
-
+    .d(db),
+    .ai(rf_ctl[0]),
+    .bi(rf_ctl[1]),
+    .ci(rf_ctl[2]),
+    .di(rf_ctl[3]),
+    .fi(rf_ctl[4]),
+    .ao(rf_ctl[5]),
+    .bo(rf_ctl[6]),
+    .co(rf_ctl[7]),
+    .do(rf_ctl[8]),
+    .fo(rf_ctl[9]),
+    .clk(clk),
+    .rst(rst),
+    .p(db),
+    .fq(fb),
+    .fod(fod)
 );
 
 endmodule
