@@ -3,7 +3,7 @@
 
 module ecu_tb;
     reg[15:0] ai = 0;
-    reg[31:0] raw = 0;
+    reg[23:0] raw = 0;
     reg clk = 0, rst = 0;
 
     wire[6:0] rf_ctl_lines;

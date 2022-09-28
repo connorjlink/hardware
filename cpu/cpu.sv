@@ -5,6 +5,7 @@
 `include "lsu/lsu.v"
 `include "rf/rf.v"
 
+
 module cpu
 (
     input clk, rst
@@ -17,13 +18,16 @@ wire[15:0] sp;
 wire[15:0] pc;
 wire[2:0] is;
 
-wire[31:0] rom_raw;
+wire[23:0] rom_raw;
 
 wire[6:0] rf_ctl;
 wire[4:0] lsu_ctl;
 wire[9:0] alu_ctl;
 wire[2:0] acu_ctl;
 wire[2:0] adu_ctl;
+
+wire out_q1, out_q2;
+wire trap;
 
 wire[7:0] fod;
 
@@ -75,6 +79,9 @@ ecu ecu_inst
     .alu(alu),
     .acu(acu),
     .adu(adu),
+    .out_q1(out_q1),
+    .out_q2(out_q2),
+    .trap(trap),
     .ao(ab)
 );
 
@@ -92,7 +99,6 @@ lsu lsu_inst
     .q(rom_raw[7:0]),
     .q1(rom_raw[15:8]),
     .q2(rom_raw[23:16]),
-    .q3(rom_raw[31:24]),
     .fo(fb),
     .spq(sp)
 );
@@ -116,5 +122,15 @@ rf rf_inst
     .fq(fb),
     .fod(fod)
 );
+
+always @(posedge clk)
+begin
+    if (out_q1)
+        db <= rom_raw[15:8];
+    else if (out_q2)
+        db <= rom_raw[23:16];
+    else
+        db <= 8'bz;
+end
 
 endmodule

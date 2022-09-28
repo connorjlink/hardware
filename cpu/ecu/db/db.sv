@@ -1,9 +1,11 @@
 //decoder block
 //this module is basically a wrapper on embedded microcode
+`include "ctl_lines.h"
+
 
 module db
 (
-    input[7:0] insn, d1, d2, d3,
+    input[7:0] insn, d1, d2,
     input[2:0] is,
 
     input clk, rst,
@@ -72,6 +74,10 @@ module db
 
     //more outputs here 
 
+    output reg out_q1,
+    output reg out_q2,
+
+    output reg trap,
     output reg[1:0] len
 );
 
@@ -105,15 +111,18 @@ module db
         begin
             tmp = ucode[addr];
 
-            rf    <= tmp[9:0];
-            lsu   <= tmp[14:10];
-            alu   <= tmp[24:15];
-            ir_we <= tmp[25];
-            pc    <= tmp[29:26];
-            acu   <= tmp[32:30];
-            adu   <= tmp[35:33];
+            rf     <= tmp[9:0];
+            lsu    <= tmp[14:10];
+            alu    <= tmp[24:15];
+            ir_we  <= tmp[25];
+            pc     <= tmp[29:26];
+            acu    <= tmp[32:30];
+            adu    <= tmp[35:33];
 
-            len   <= tmp[63:62]; 
+            out_q1 <= tmp[59];
+            out_q2 <= tmp[60];
+            trap   <= tmp[61];
+            len    <= tmp[63:62]; 
         end
     end
 
