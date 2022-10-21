@@ -11,7 +11,7 @@ module cpu
     input clk, rst
 );
 
-wire[7:0] db, fb;
+wire[7:0] db, fb, fod;
 wire[15:0] ab;
 
 wire[15:0] sp;
@@ -20,34 +20,118 @@ wire[2:0] is;
 
 wire[23:0] rom_raw;
 
-wire[6:0] rf_ctl;
-wire[4:0] lsu_ctl;
-wire[9:0] alu_ctl;
-wire[2:0] acu_ctl;
-wire[2:0] adu_ctl;
+wire alu_add, 
+     alu_sub,
+     alu_and,
+     alu_or,
+     alu_not,
+     alu_shl,
+     alu_shr,
+     alu_wa,
+     alu_wb,
+     alu_oe;
 
-wire out_q1, out_q2;
+wire rf_ai, rf_bi, rf_ci, rf_di, rf_fi,
+     rf_ao, rf_bo, rf_co, rf_do, rf_fo;
+
+wire acu_wl,
+     acu_wh,
+     acu_oe;
+
+wire adu_rl,
+     adu_rh,
+     adu_we;
+
+wire lsu_re,
+     lsu_we,
+     lsu_sp_d,
+     lsu_sp_we,
+     lsu_sp_en;
+
+wire ir_we;
+
+wire pc_lrc, 
+     pc_ini, 
+     pc_sub, 
+     pc_oe;
+
+wire out_q1,
+     out_q2;
+
 wire trap;
 
-wire[7:0] fod;
+
+wire[1:0] len;
+
+wire[7:0] insn, d1, d2;
+wire[2:0] is;
+
+wire[15:0] pc_out;
+assign ao = pc_out;
+
+ir ir_inst
+(
+    .raw(raw),
+    .len(len),
+    .we(ir_we),
+    .clk(clk),
+    .rst(rst),
+    .insn(insn),
+    .d1(d1),
+    .d2(d2)
+);
+
+pc pc_inst
+(
+    .ai(ai),
+    .clk(clk),
+    .rst(rst),
+    .lrc(pc_lrc),
+    .ini(pc_ini),
+    .cub(pc_cub),
+    .oe(pc_oe),
+    .ao(pc_out),
+    .is(is)
+);
+
+db db_inst
+(
+    .insn(insn),
+    .d1(d1),
+    .d2(d2),
+    .d3(d3),
+    .clk(clk),
+    .rst(rst),
+    .rf(rf),
+    .lsu(lsu),
+    .alu(alu),
+    .ir_we(ir_we),
+    .pc(pc_ctl_lines),
+    .acu(acu),
+    .adu(adu),
+    .out_q1(out_q1),
+    .out_q2(out_q2),
+    .trap(trap),
+    .len(len)
+);
 
 acu acu_inst
 (
     .d(db),
-    .wl(acu_ctl[0]),
-    .wh(acu_ctl[1]),
+    .wl(acu_wl),
+    .wh(acu_wh),
     .clk(clk),
     .rst(rst),
-    .oe(acu_ctl[2]),
+    .oe(acu_oe),
     .q(ab),
 );
 
 adu adu_inst
 (
     .a(ab),
-    .we(adu_ctl[0]),
-    .rl(adu_ctl[1]),
-    .rh(adu_ctl[2]),
+    .we(adu_we),
+    .rl(adu_rl),
+    .rh(adu_rh),
     .clk(clk),
     .rst(rst),
     .q(db)
@@ -58,12 +142,18 @@ alu alu_inst
     .a(db),
     .b(db),
     .fi(fod),
-    .op(alu_ctl[6:0]),
-    .wa(alu_ctl[7]),
-    .wb(alu_ctl[8]),
+    .add(alu_add),
+    .sub(alu_sub),
+    .land(alu_and),
+    .lor(alu_or),
+    .lnot(alu_not),
+    .shl(alu_shl),
+    .shr(alu_shr),
+    .wa(alu_wa),
+    .wb(alu_wb),
     .clk(clk),
     .rst(rst),
-    .oe(alu_ctl[9]),
+    .oe(alu_oe),
     .d(db),
     .fo(fb)
 );
@@ -91,12 +181,12 @@ lsu lsu_inst
     .a(ab),
     .clk(clk),
     .rst(rst),
-    .sp_d(lsu_ctl[0]),
-    .sp_we(lsu_ctl[1]),
-    .sp_en(lsu_ctl[2]),
-    .re(lsu_ctl[3]),
-    .we(lsu_ctl[4]),
-    .q(rom_raw[7:0]),
+    .sp_d(lsu_sp_d),
+    .sp_we(lsu_sp_we),
+    .sp_en(lsu_sp_en),
+    .re(lsu_re),
+    .we(lsu_we),
+    .q0(rom_raw[7:0]),
     .q1(rom_raw[15:8]),
     .q2(rom_raw[23:16]),
     .fo(fb),

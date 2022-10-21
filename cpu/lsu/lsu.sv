@@ -13,7 +13,7 @@ module lsu
 
     input re, we, 
 
-    output[7:0] q, q1, q2,
+    output[7:0] q0, q1, q2,
     output[7:0] fo,
     output[15:0] spq
 );
@@ -29,7 +29,7 @@ ram ram_inst
     .we(we),
     .clk(clk),
     .rst(rst),
-    .q(q)
+    .q(q0)
 );
 
 rom rom_inst
@@ -37,7 +37,7 @@ rom rom_inst
     .a(a),
     .re(re),
     .clk(clk),
-    .q0(q),
+    .q0(q0),
     .q1(q1),
     .q2(q2)
 );

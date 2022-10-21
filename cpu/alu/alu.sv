@@ -1,11 +1,18 @@
 module alu
 (
     input[7:0] a, b, fi,
-    input[6:0] op, 
 
     input wa, wb,
     input clk, rst,
     input oe,
+
+    input add,
+    input sub,
+    input land,
+    input lor,
+    input lnot,
+    input shl,
+    input shr,
 
     output reg[7:0] d, fo
 );
@@ -47,64 +54,60 @@ module alu
 
         else
         begin
-            if (wa)
-                ac <= a;
-
-            if (wb)
-                bc <= b;
+            if (wa) ac <= a;
+            if (wb) bc <= b;
 
             ai <= { 1'b0, ac };
             bi <= { 1'b0, bc };
 
-            case (op)
-                7'b0000001: //addition
-                begin
-                    out = ai + bi + { 8'h00, fi[CARRY] };
-                    flags[CARRY] = out[8];
-                end
+            if (alu_add)
+            begin
+                out = ai + bi + { 8'h00, fi[CARRY] };
+                flags[CARRY] = out[8];
+            end
 
-                7'b0000010: //subtraction
-                begin
-                    out = ai - bi - { 8'h00, fi[CARRY] };
-                    flags[CARRY] = out[8];
-                end
+            else if (alu_sub)
+            begin
+                out = ai - bi - { 8'h00, fi[CARRY] };
+                flags[CARRY] = out[8];
+            end
 
-                7'b0000100: //bitwise and
-                begin
-                    out = ai & bi;
-                    flags[CARRY] = 0;
-                end
+            else if (alu_and)
+            begin
+                out = ai & bi;
+                flags[CARRY] = 0;
+            end
 
-                7'b0001000: //bitwise or
-                begin
-                    out = ai | bi;
-                    flags[CARRY] = 0;
-                end
+            else if (alu_or)
+            begin
+                out = ai | bi;
+                flags[CARRY] = 0;
+            end
 
-                7'b0010000: //bitwise not
-                begin
-                    out = ~ai;
-                    flags[CARRY] = 0;
-                end
+            else if (alu_not)
+            begin
+                out = ~ai;
+                flags[CARRY] = 0;
+            end
 
-                7'b0100000: //left shift
-                begin
-                    out = a << b;
-                    flags[CARRY] = 0;
-                end
+            else if (alu_shl)
+            begin
+                out = a << b;
+                flags[CARRY] = 0;
+            end
 
-                7'b1000000: //right shift
-                begin
-                    out = a >> b;
-                    flags[CARRY] = 0;
-                end
+            else if (alu_shr)
+            begin
+                out = a >> b;
+                flags[CARRY] = 0;
+            end
 
-                default:
-                begin
-                    out = 0;
-                    flags[CARRY] = 0;
-                end
-            endcase
+            else
+            begin
+                out = 0;
+                flags[CARRY] = 0;
+            end
+
 
             flags[1] = (out[7:0] == 0);
             tmp = out[7:0];
