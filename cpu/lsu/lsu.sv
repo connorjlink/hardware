@@ -4,19 +4,63 @@
 
 module lsu
 (
-    input[7:0] d,
-    input[15:0] a,
+    input[7:0] dbi,
+    input[15:0] abi,
     
     input clk, rst,
 
-    input sp_d, sp_we, sp_en,
+    input stack_decrement,
+          stack_write,
+          stack_enable,
 
-    input re, we, 
+    input read_enable,
+          write_enable,
 
-    output[7:0] q0, q1, q2,
-    output[7:0] fo,
-    output[15:0] spq
+    output[7:0] instruction, data1, data2,
+    output[7:0] fbo,
+    output[15:0] stack_pointer,
 );
+    localparam RAM_SIZE = 32768;
+
+    logic[7:0] ram[0:RAM_SIZE-1];
+
+`define RESET_MEM(x, y) for (integer i = 0; i < y``_SIZE; ++i) \
+                            x[i] = 0;
+
+    initial
+    begin
+        `RESET_MEM(ram, RAM)
+    end
+
+    // TODO: maybe refactor later to be sensitive only to negedge or posedge
+    always @(clk)
+    begin
+        if (rst)
+        begin
+            `RESET_MEM(ram, RAM)
+        end
+
+        else
+        begin
+            if (a < RAM_SIZE)
+            begin
+                if (write_eanble)
+                    ram[abi] = dbi;
+
+                if (read_enable)
+                    dbo = ram[abi];
+                else
+                    dbo = 8'bz;
+            end
+
+            else
+            begin
+
+            end
+        end
+    end
+
+
     wire[15:0] sp_val;
 
     assign spq = sp_val;

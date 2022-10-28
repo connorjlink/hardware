@@ -21,20 +21,14 @@ module agu
 
     initial
     begin
-        cc  <= 16'h0;
-        dc  <= 16'h0;
-        abo <= 16'bz;
-        dbo <= 8'bz;
+        `RESET_ALL
     end
 
     always @(posedge clk)
     begin
         if (rst)
         begin
-            cc  <= 16'h0;
-            dc  <= 16'h0;
-            abo <= 16'bz;
-            dbo <= 8'bz;
+            `RESET_ALL
         end
 
         else
