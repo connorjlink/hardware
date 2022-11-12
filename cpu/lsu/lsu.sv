@@ -2,6 +2,9 @@
 `include "rom/rom.v"
 `include "sp/sp.v"
 
+`define RESET_MEM(x, y) for (integer i = 0; i < y``_SIZE; ++i) \
+                            x[i] = 0;
+
 module lsu
 (
     input[7:0] dbi,
@@ -24,9 +27,6 @@ module lsu
 
     logic[7:0] ram[0:RAM_SIZE-1];
 
-`define RESET_MEM(x, y) for (integer i = 0; i < y``_SIZE; ++i) \
-                            x[i] = 0;
-
     initial
     begin
         `RESET_MEM(ram, RAM)
@@ -44,7 +44,7 @@ module lsu
         begin
             if (a < RAM_SIZE)
             begin
-                if (write_eanble)
+                if (write_enable)
                     ram[abi] = dbi;
 
                 if (read_enable)
@@ -55,7 +55,7 @@ module lsu
 
             else
             begin
-
+                
             end
         end
     end
@@ -96,3 +96,5 @@ sp sp_inst
 );
 
 endmodule
+
+`undef RESET_MEM

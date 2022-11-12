@@ -1,48 +1,52 @@
-module agu
+`define RESET_ALL   compose_memory <= 16'h0; \
+                  decompose_memory <= 16'h0; \
+                       address_out <= 16'bz; \
+                          data_out <= 8'bz;
+
+module address_generation_unit
 (
-    input[15:0] abi,
-    input[7:0] dbi,
+    input[15:0] address_in,
+    input[7:0] data_in,
 
-    input dwe, drl, drh,
-    input cre, cwl, cwh,
+    input decompose_write_enable, decompose_read_low, decompose_read_high,
+    input compose_read_enable, compose_write_low, compose_write_high,
 
-    input clk, rst,
+    input clock, reset,
 
-    output logic[15:0] abo,
-    output logic[7:0] dbo
+    output logic[15:0] address_out,
+    output logic[7:0] data_out
 );
-    logic[15:0] cc, dc;
-
-//reuse the register clear code
-`define RESET_ALL cc  <= 16'h0; \
-                  dc  <= 16'h0; \
-                  abo <= 16'bz; \
-                  dbo <= 8'bz;
+    logic[15:0] compose_memory, decompose_memory;
 
     initial
     begin
         `RESET_ALL
     end
 
-    always @(posedge clk)
+    always @(posedge clock)
     begin
-        if (rst)
+        if (reset)
         begin
             `RESET_ALL
         end
 
         else
         begin
-            if (dwe) dc = abi;
+            if (decompose_write_enable) decompose_memory = address_in;
 
-                 if (cwl) cc[7:0]  = dbi;
-            else if (cwh) cc[15:8] = dbi;
+                 if (compose_write_low)  compose_memory[7:0]  = data_in;
+            else if (compose_write_high) compose_memory[15:8] = data_in;
 
-                 if (drl) dbo = dc[7:0];
-            else if (drh) dbo = dc[15:8];
+                 if (decompose_read_low)  data_out = decompose_memory[7:0];
+            else if (decompose_read_high) data_out = decompose_memory[15:8];
 
-            if (cre || (!drl && !drh)) dbo = cc;
-            else                       dbo = 16'bz;
+            if (compose_read_enable || (!decompose_read_low && !decompose_read_high)) 
+                data_out = compose_memory;
+            else 
+                data_out = 16'bz;
         end
     end
+
 endmodule 
+
+`undef RESET_ALL
